@@ -75,3 +75,12 @@ SET conservation_status = 'Historic'
 WHERE extract(year from discovery_date) < 1800;
 
 SELECT * FROM species;
+
+-- Problem 8: Label each sighting's time of day as 'Morning', 'Afternoon', or 'Evening'.
+SELECT sighting_id,
+    CASE
+        WHEN EXTRACT(hour from sighting_time) < 12 THEN 'Morning'
+        WHEN EXTRACT(hour from sighting_time) >= 12 AND EXTRACT(hour from sighting_time) < 17 THEN 'Afternoon'
+        WHEN EXTRACT(hour from sighting_time) >= 17 THEN 'Evening'
+    END 
+    AS time_of_day FROM sightings;
