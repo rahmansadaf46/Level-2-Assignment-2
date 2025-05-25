@@ -1,4 +1,4 @@
--- Active: 1747563587031@@127.0.0.1@5433@conservation_db
+-- Active: 1747563587031@@127.0.0.1@5432@conservation_db
 
 CREATE TABLE rangers (
     ranger_id SERIAL PRIMARY KEY,
