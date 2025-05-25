@@ -1,4 +1,5 @@
--- Active: 1747563587031@@127.0.0.1@5432@conservation_db@public
+-- Active: 1747563587031@@127.0.0.1@5433@conservation_db
+
 CREATE TABLE rangers (
     ranger_id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -84,3 +85,13 @@ SELECT sighting_id,
         WHEN EXTRACT(hour from sighting_time) >= 17 THEN 'Evening'
     END 
     AS time_of_day FROM sightings;
+
+-- Problem 9: Delete rangers who have never sighted any species
+DELETE FROM rangers
+WHERE ranger_id IN (
+    SELECT ranger_id FROM rangers
+    LEFT JOIN sightings USING(ranger_id)
+    WHERE sighting_id IS NULL
+);
+
+SELECT * FROM rangers;
